@@ -41,5 +41,5 @@ main(int argc, char **argv)
 	if (file != stdin)
 		fclose(file);
 
-	return 0;
+	return EXIT_SUCCESS;
 }
