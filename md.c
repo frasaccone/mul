@@ -4,6 +4,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "arg.h"
 
@@ -19,10 +20,26 @@ usage(void)
 int
 main(int argc, char **argv)
 {
+	FILE *file = stdin;
+
 	ARGBEGIN {
 	default:
 		usage();
 	} ARGEND
+
+	if (argc > 1) {
+		usage();
+	} else if (argc == 1 && strcmp(argv[0], "-")) {
+		file = fopen(argv[0], "rb");
+
+		if (!file) {
+			fprintf(stderr, "Unable to open %s.", argv[0]);
+			return EXIT_FAILURE;
+		}
+	}
+
+	if (file != stdin)
+		fclose(file);
 
 	return 0;
 }
