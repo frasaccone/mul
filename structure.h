@@ -1,5 +1,5 @@
-#ifndef _MARKDOWN_H
-#define _MARKDOWN_H
+#ifndef _STRUCTURE_H
+#define _STRUCTURE_H
 
 enum blocktype {
 	CONTAINER_BLOCK_DOCUMENT,
