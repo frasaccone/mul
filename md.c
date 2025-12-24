@@ -9,9 +9,7 @@
 
 void usage(void);
 
-static struct block document = {
-	.type = CONTAINER_BLOCK_DOCUMENT,
-};
+static struct block document = { 0 };
 
 void
 usage(void)
@@ -52,6 +50,8 @@ main(int argc, char **argv)
 			return EXIT_FAILURE;
 		}
 	}
+
+	document.type = CONTAINER_BLOCK_DOCUMENT;
 
 	while (fgets(line, sizeof(line), file))
 		parseline(&document, line);
