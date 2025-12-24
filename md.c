@@ -2,11 +2,13 @@
 #define _POSIX_C_SOURCE 200809L
 #define _XOPEN_SOURCE   700
 
+#include <limits.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 #include "arg.h"
+#include "parse.h"
 #include "structure.h"
 
 void usage(void);
@@ -28,6 +30,7 @@ main(int argc, char **argv)
 	int hflag = 0,
 	    tflag = 0;
 	FILE *file = stdin;
+	char line[LINE_MAX];
 
 	ARGBEGIN {
 	case 'h':
@@ -53,6 +56,9 @@ main(int argc, char **argv)
 			return EXIT_FAILURE;
 		}
 	}
+
+	while (fgets(line, sizeof(line), file))
+		parseline(&document, line);
 
 	if (file != stdin)
 		fclose(file);
