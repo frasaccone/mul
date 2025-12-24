@@ -7,11 +7,11 @@
 /* It reallocates the content buffer of block b to concatenate the content
    string at its end. If the block b has an unallocated content buffer, it is
    allocated and the content string is copied to it. */
-void addcontent(struct block *b, char *content);
+static void addcontent(struct block *b, char *content);
 
 /* It returns the last open child of block b. If b has no open children, NULL
    is returned instead. */
-struct block *lastopenchild(struct block *b);
+static struct block *lastopenchild(struct block *b);
 
 void
 addcontent(struct block *b, char *content)
