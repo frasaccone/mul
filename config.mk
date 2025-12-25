@@ -1,6 +1,7 @@
 PREFIX    = /usr/local
 MANPREFIX = $(PREFIX)/share/man
 
+AR = ar
 CC = cc
 
 CFLAGS  = -std=c99 -Wall -Wextra -Wpedantic -D_DEFAULT_SOURCE \
