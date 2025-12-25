@@ -4,7 +4,7 @@
 #include <string.h>
 
 #include "arg.h"
-#include "parse.h"
+#include "mul.h"
 #include "structure.h"
 
 void usage(void);

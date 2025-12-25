@@ -1,5 +1,5 @@
-#ifndef _PARSE_H
-#define _PARSE_H
+#ifndef _MUL_H
+#define _MUL_H
 
 #include <stddef.h>
 
