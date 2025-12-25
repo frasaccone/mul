@@ -93,7 +93,11 @@ main(int argc, char **argv)
 
 	free(in);
 
-	if (tflag && multree(document)) {
+	if (hflag) {
+		fprintf(stderr, "HTML output not implemented yet.\n");
+		free(document);
+		return EXIT_FAILURE;
+	} else if (multree(document)) {
 		free(document);
 		return EXIT_FAILURE;
 	}
