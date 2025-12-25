@@ -34,7 +34,7 @@ muldocument(void)
 		return NULL;
 	}
 
-	d->type = NODE_DOCUMENT;
+	d->type = MUL_NODE_DOCUMENT;
 
 	return d;
 }
