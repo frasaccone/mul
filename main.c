@@ -56,21 +56,27 @@ main(int argc, char **argv)
 	fseek(file, 0, SEEK_SET);
 
 	if (!(in = malloc(insize + 1))) {
-		if (file != stdin)
-			fclose(file);
+		if (file != stdin && fclose(file)) {
+			perror("fclose");
+			return EXIT_FAILURE;
+		}
 		perror("malloc");
 		return EXIT_FAILURE;
 	}
 
 	if (fread(in, insize, 1, file) < 1) {
-		if (file != stdin)
-			fclose(file);
+		if (file != stdin && fclose(file)) {
+			perror("fclose");
+			return EXIT_FAILURE;
+		}
 		perror("fread");
 		return EXIT_FAILURE;
 	}
 
-	if (file != stdin)
-		fclose(file);
+	if (file != stdin && fclose(file)) {
+		perror("fclose");
+		return EXIT_FAILURE;
+	}
 
 	if (!(document = muldocument()))
 		return EXIT_FAILURE;
