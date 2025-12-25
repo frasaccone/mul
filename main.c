@@ -6,7 +6,7 @@
 #include "arg.h"
 #include "mul.h"
 
-void usage(void);
+static void usage(void);
 
 void
 usage(void)
