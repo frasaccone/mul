@@ -1,6 +1,8 @@
 #include "mul.h"
 
 #include <stddef.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 #include "buffer.h"
@@ -20,6 +22,21 @@ lastopenchild(struct mulnode *n)
 	}
 
 	return lastopen;
+}
+
+struct mulnode *
+muldocument(void)
+{
+	struct mulnode *d;
+
+	if (!(d = malloc(sizeof(struct mulnode)))) {
+		perror("malloc");
+		return NULL;
+	}
+
+	d->type = NODE_DOCUMENT;
+
+	return d;
 }
 
 void

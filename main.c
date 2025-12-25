@@ -8,8 +8,6 @@
 
 void usage(void);
 
-static struct mulnode document = { 0 };
-
 void
 usage(void)
 {
@@ -25,6 +23,7 @@ main(int argc, char **argv)
 	FILE *file = stdin;
 	size_t filesize;
 	char *filecontent;
+	struct mulnode *document;
 
 	ARGBEGIN {
 	case 'h':
@@ -51,8 +50,6 @@ main(int argc, char **argv)
 		}
 	}
 
-	document.type = NODE_DOCUMENT;
-
 	fseek(file, 0, SEEK_END);
 	filesize = ftell(file);
 	fseek(file, 0, SEEK_SET);
@@ -70,8 +67,12 @@ main(int argc, char **argv)
 	if (file != stdin)
 		fclose(file);
 
-	parsebuffer(&document, filecontent, filesize);
+	if (!(document = muldocument()))
+		return EXIT_FAILURE;
 
+	parsebuffer(document, filecontent, filesize);
+
+	free(document);
 	free(filecontent);
 
 	return EXIT_SUCCESS;
