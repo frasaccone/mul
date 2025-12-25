@@ -1,7 +1,6 @@
 #include "parse.h"
 
-#include <stdio.h>
-#include <stdlib.h>
+#include <stddef.h>
 #include <string.h>
 
 #include "buffer.h"
@@ -24,7 +23,7 @@ lastopenchild(struct node *n)
 }
 
 void
-parseline(struct node *document, char *line)
+parsebuffer(struct node *document, char *buf, size_t buflen)
 {
 	struct node *c, *lastopen;
 
@@ -38,6 +37,6 @@ parseline(struct node *document, char *line)
 	                                lastopen->content
 	                                ? strlen(lastopen->content)
 	                                : 0,
-	                                line,
-	                                strlen(line));
+	                                buf,
+	                                strnlen(buf, buflen));
 }

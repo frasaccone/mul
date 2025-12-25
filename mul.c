@@ -24,7 +24,8 @@ main(int argc, char **argv)
 	int hflag = 0,
 	    tflag = 0;
 	FILE *file = stdin;
-	char line[LINE_MAX];
+	size_t filesize;
+	char *filecontent;
 
 	ARGBEGIN {
 	case 'h':
@@ -53,11 +54,26 @@ main(int argc, char **argv)
 
 	document.type = NODE_DOCUMENT;
 
-	while (fgets(line, sizeof(line), file))
-		parseline(&document, line);
+	fseek(file, 0, SEEK_END);
+	filesize = ftell(file);
+	fseek(file, 0, SEEK_SET);
+
+	if (!(filecontent = malloc(filesize + 1))) {
+		perror("malloc");
+		exit(EXIT_FAILURE);
+	}
+
+	if (fread(filecontent, filesize, 1, file) < 1) {
+		perror("fread");
+		exit(EXIT_FAILURE);
+	}
 
 	if (file != stdin)
 		fclose(file);
+
+	parsebuffer(&document, filecontent, filesize);
+
+	free(filecontent);
 
 	return EXIT_SUCCESS;
 }
