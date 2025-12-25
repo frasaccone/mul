@@ -43,6 +43,6 @@ struct mulnode *muldocument(void);
    buffer.
 
    In case of error, -1 is returned; otherwise, 0 is returned. */
-int parsebuffer(struct mulnode *document, char *buf, size_t buflen);
+int mulparse(struct mulnode *document, char *buf, size_t buflen);
 
 #endif

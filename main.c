@@ -70,7 +70,7 @@ main(int argc, char **argv)
 	if (!(document = muldocument()))
 		return EXIT_FAILURE;
 
-	if (parsebuffer(document, filecontent, filesize)) {
+	if (mulparse(document, filecontent, filesize)) {
 		free(document);
 		return EXIT_FAILURE;
 	}

@@ -40,7 +40,7 @@ muldocument(void)
 }
 
 int
-parsebuffer(struct mulnode *document, char *buf, size_t buflen)
+mulparse(struct mulnode *document, char *buf, size_t buflen)
 {
 	struct mulnode *c, *lastopen;
 
