@@ -5,8 +5,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "buffer.h"
-
 struct mulnodestackel {
 	struct mulnode *n;
 	int l;
@@ -55,11 +53,17 @@ mulparse(struct mulnode *document, char *buf, size_t buflen)
 	while ((c = lastopenchild(lastopen)))
 		lastopen = c;
 
-	if (!(lastopen->contentsize = addtobuffer(&lastopen->content,
-	                                          lastopen->contentsize,
-	                                          buf,
-	                                          strnlen(buf, buflen))))
+	if (!(lastopen->content = realloc(lastopen->content,
+	                                  lastopen->contentsize + buflen))) {
+		perror("realloc");
 		return -1;
+	}
+
+	memcpy((char *)((size_t)lastopen->content + lastopen->contentsize),
+	       buf, buflen);
+
+	lastopen->contentsize += buflen;
+	lastopen->content[lastopen->contentsize] = '\0';
 
 	return 0;
 }
