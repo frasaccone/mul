@@ -39,7 +39,7 @@ muldocument(void)
 	return d;
 }
 
-void
+int
 parsebuffer(struct mulnode *document, char *buf, size_t buflen)
 {
 	struct mulnode *c, *lastopen;
@@ -56,5 +56,7 @@ parsebuffer(struct mulnode *document, char *buf, size_t buflen)
 	                                      : 0,
 	                                      buf,
 	                                      strnlen(buf, buflen))))
-		exit(EXIT_FAILURE);
+		return -1;
+
+	return 0;
 }
