@@ -6,16 +6,16 @@
 
 #include "buffer.h"
 
-/* It returns the last open child of block b. If b has no open children, NULL
+/* It returns the last open child of node b. If b has no open children, NULL
    is returned instead. */
-static struct block *lastopenchild(struct block *b);
+static struct node *lastopenchild(struct node *n);
 
-struct block *
-lastopenchild(struct block *b)
+struct node *
+lastopenchild(struct node *n)
 {
-	struct block *c, *lastopen = NULL;
+	struct node *c, *lastopen = NULL;
 
-	for (c = b->children; c && c->sibling; c = c->sibling) {
+	for (c = n->children; c && c->sibling; c = c->sibling) {
 		if (!c->closed)
 			lastopen = c;
 	}
@@ -24,9 +24,9 @@ lastopenchild(struct block *b)
 }
 
 void
-parseline(struct block *document, char *line)
+parseline(struct node *document, char *line)
 {
-	struct block *c, *lastopen;
+	struct node *c, *lastopen;
 
 	/* Make lastopen the deepest last open child of document, or make it
 	   document if it has no open children. */

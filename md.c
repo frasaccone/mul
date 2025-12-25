@@ -9,7 +9,7 @@
 
 void usage(void);
 
-static struct block document = { 0 };
+static struct node document = { 0 };
 
 void
 usage(void)
@@ -51,7 +51,7 @@ main(int argc, char **argv)
 		}
 	}
 
-	document.type = BLOCK_CONTAINER_DOCUMENT;
+	document.type = NODE_DOCUMENT;
 
 	while (fgets(line, sizeof(line), file))
 		parseline(&document, line);

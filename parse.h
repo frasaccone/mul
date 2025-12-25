@@ -4,6 +4,6 @@
 #include "structure.h"
 
 /* It updates the document after parsing the given line. */
-void parseline(struct block *document, char *line);
+void parseline(struct node *document, char *line);
 
 #endif

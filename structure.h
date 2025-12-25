@@ -1,35 +1,35 @@
 #ifndef _STRUCTURE_H
 #define _STRUCTURE_H
 
-enum blocktype {
-	BLOCK_CONTAINER_DOCUMENT,
+enum nodetype {
+	NODE_DOCUMENT,
 
-	BLOCK_CONTAINER_ORDERED_LIST_ITEM,
-	BLOCK_CONTAINER_QUOTE,
-	BLOCK_CONTAINER_UNORDERED_LIST_ITEM,
+	NODE_ORDERED_LIST_ITEM,
+	NODE_BLOCK_QUOTE,
+	NODE_UNORDERED_LIST_ITEM,
 
-	BLOCK_LEAF_CODE_BLOCK,
-	BLOCK_LEAF_HEADER_1,
-	BLOCK_LEAF_HEADER_2,
-	BLOCK_LEAF_PARAGRAPH,
-	BLOCK_LEAF_THEMATIC_BREAK,
+	NODE_CODE_BLOCK,
+	NODE_HEADER_1,
+	NODE_HEADER_2,
+	NODE_PARAGRAPH,
+	NODE_THEMATIC_BREAK,
 };
 
-struct block {
-	enum blocktype type;
+struct node {
+	enum nodetype type;
 
-	/* It is 0 if the block is open, or any non-0 integer if it is
+	/* It is 0 if the node is open, or any non-0 integer if it is
 	   closed. */
 	unsigned int closed;
 
-	/* The text content of the block. */
+	/* The text content of the node. */
 	char *content;
 
 	/* The pointer to the next sibling. */
-	struct block *sibling;
+	struct node *sibling;
 
 	/* The pointer to the first child. */
-	struct block *children;
+	struct node *children;
 };
 
 #endif
